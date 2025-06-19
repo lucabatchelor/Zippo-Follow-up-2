@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategic Proposal: Zippo & Brandbassador (Final Version)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals & Subtle Gold -->
+    <!-- Application Structure Plan: A "Strategic Proposal Dashboard" designed for an executive audience. The flow is narrative-driven: 1. Executive Summary (top-level overview). 2. The Strategic Pivot (contextualizing Zippo's current challenge). 3. The Community Opportunity (visually contrasting the problem with the solution). 4. The Brandbassador Solution (interactive deep-dive into value props). 5. The Pilot Program (actionable next steps). 6. Strategic Impact & ROI for Zippo Leadership (direct benefits and why now). This structure moves from 'what is' to 'what could be' and 'how to get there', making it a persuasive tool for internal selling. -->
+    <!-- Visualization & Content Choices: 1. Web Traffic: Donut Chart (Chart.js) to show brand strength. Interaction: Tooltips. Justification: Quick visual for source mix. 2. Community Structure: Custom Diagram (HTML/Tailwind/JS) to compare 'Fragmented' vs. 'Unified' states. Interaction: Toggle. Justification: Most powerful way to visualize a structural change. 3. Brandbassador Solution: Interactive Cards (HTML/JS) that expand. Justification: Manages information density, encourages interaction. 4. Leadership/Pilot Info: Accordion (HTML/JS). Justification: Organizes detailed text cleanly. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF7;
+            color: #333333;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 280px;
+            max-height: 320px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 320px;
+                max-height: 350px;
+            }
+        }
+        .nav-link {
+            transition: color 0.3s, border-bottom-color 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #C0952B;
+            border-bottom-color: #C0952B;
+        }
+        .accordion-header {
+            transition: background-color 0.3s;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+        .solution-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .solution-card:hover {
+            transform: translateY(-5px);
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl md:text-2xl font-bold text-gray-800">
+                Zippo <span class="text-[#C0952B]">&</span> Brandbassador
+            </h1>
+            <div class="hidden md:flex space-x-8">
+                <a href="#summary" class="nav-link font-medium pb-1">Summary</a>
+                <a href="#opportunity" class="nav-link font-medium pb-1">Opportunity</a>
+                <a href="#solution" class="nav-link font-medium pb-1">Solution</a>
+                <a href="#pilot" class="nav-link font-medium pb-1">Pilot Program</a>
+                <a href="#leadership" class="nav-link font-medium pb-1">Leadership Focus</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#C0952B]">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 flex flex-col space-y-2">
+             <a href="#summary" class="block py-2 text-center nav-link font-medium">Summary</a>
+             <a href="#opportunity" class="block py-2 text-center nav-link font-medium">Opportunity</a>
+             <a href="#solution" class="block py-2 text-center nav-link font-medium">Solution</a>
+             <a href="#pilot" class="block py-2 text-center nav-link font-medium">Pilot Program</a>
+             <a href="#leadership" class="block py-2 text-center nav-link font-medium">Leadership Focus</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-8 md:py-12">
+        
+        <!-- Section 1: Executive Summary -->
+        <section id="summary" class="mb-16 scroll-mt-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800">A Strategic Partnership for Growth</h2>
+                <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">This proposal presents a strategic imperative for Zippo: to future-proof its iconic brand by transforming fragmented customer passion into a powerful, measurable engine for growth. Brandbassador offers the platform to unify communities, scale authentic content, and drive demonstrable ROI, ensuring Zippo's relevance and market leadership for a new generation.</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200/50">
+                    <h3 class="font-bold text-xl mb-4 text-[#C0952B]">The Strategic Pivot</h3>
+                     <p class="text-gray-600 mb-4">Zippo is at a crucial inflection point. To maintain market leadership, the brand must effectively engage **Gen Z and younger millennials** and diversify its product appeal beyond traditional associations. This requires modernizing marketing tactics, moving beyond "antiquated" approaches, and shedding the "grandpa's lighter" image for a more **relevant and aspirational brand perception**.</p>
+                     <p class="text-gray-600">This strategic shift necessitates embracing peer-to-peer evangelism and authentic, community-driven content, which traditional advertising struggles to achieve. Zippo's existing brand love is immense, but it is currently a fragmented and underutilized resource.</p>
+                </div>
+                 <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200/50">
+                    <h3 class="font-bold text-xl mb-4 text-center text-[#C0952B]">Strong Foundations</h3>
+                    <p class="text-center text-gray-500 text-sm mb-4">Zippo's high direct & organic web traffic confirms immense brand loyalty and a robust online presence.</p>
+                    <div class="chart-container">
+                        <canvas id="trafficSourceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Community Opportunity -->
+        <section id="opportunity" class="mb-16 scroll-mt-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800">The Community Opportunity</h2>
+                <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Zippo's profound brand passion is its greatest untapped asset, currently diffused across various unmanaged channels. This section visually demonstrates how Brandbassador transforms this fragmented ecosystem into a unified, powerful community marketing engine.</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg border border-gray-200/50 p-6 md:p-8">
+                <div id="community-diagram" class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <!-- This content will be dynamically generated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: The Brandbassador Solution -->
+        <section id="solution" class="mb-16 scroll-mt-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800">A Unified Platform for Growth</h2>
+                <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Brandbassador provides a single, powerful solution directly addressing Zippo's core strategic needs. Click each card to understand how we transform passionate, yet fragmented, brand love into a scalable, measurable growth engine.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Solution Cards -->
+                <div class="solution-card bg-white p-6 rounded-xl shadow-lg border border-gray-200/50 cursor-pointer" data-solution="ugc">
+                    <h4 class="font-bold text-lg mb-2">1. Scale Authentic UGC</h4>
+                    <p class="text-gray-600 text-sm">Generate a continuous stream of authentic content to speak credibly to new audiences and fuel modern marketing channels.</p>
+                </div>
+                <div class="solution-card bg-white p-6 rounded-xl shadow-lg border border-gray-200/50 cursor-pointer" data-solution="community">
+                    <h4 class="font-bold text-lg mb-2">2. Formalize Community</h4>
+                    <p class="text-gray-600 text-sm">Unify organic communities (Reddit, clubs) and loyalty programs into a single, gamified, and manageable hub.</p>
+                </div>
+                <div class="solution-card bg-white p-6 rounded-xl shadow-lg border border-gray-200/50 cursor-pointer" data-solution="roi">
+                    <h4 class="font-bold text-lg mb-2">3. Drive Measurable ROI</h4>
+                    <p class="text-gray-600 text-sm">Provide clear, attributable sales and engagement data that aligns with Zippo's performance-focused analytics culture.</p>
+                </div>
+                 <div class="solution-card bg-white p-6 rounded-xl shadow-lg border border-gray-200/50 cursor-pointer" data-solution="safety">
+                    <h4 class="font-bold text-lg mb-2">4. Ensure Brand Safety</h4>
+                    <p class="text-gray-600 text-sm">Offer robust controls and flexibility to manage ambassador content and ensure compliance with global regulations.</p>
+                </div>
+            </div>
+            <div id="solution-details" class="mt-8 bg-amber-50/50 border border-amber-200/50 p-6 rounded-xl hidden">
+                <!-- Details will be injected here by JS -->
+            </div>
+        </section>
+
+        <!-- Section 4: Proposed Pilot Program -->
+        <section id="pilot" class="mb-16 scroll-mt-24">
+             <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Proposed Pilot Program</h2>
+                <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">A low-risk, high-impact pathway to validate the Brandbassador model for Zippo and provide tangible data for the upcoming budget season.</p>
+            </div>
+            <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg border border-gray-200/50 p-6 md:p-8">
+                <h3 class="font-bold text-2xl mb-4 text-[#C0952B]">Pilot Concept: Engaging the Next Generation (US Focus)</h3>
+                <p class="text-gray-600 mb-6">This pilot will target Zippo's strategic goal of penetrating **Gen Z and younger millennial** markets and revitalizing the brand image for a modern, urban aesthetic. The initial focus will be on the **US market**, leveraging Zippo's existing partnerships.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <h4 class="font-semibold text-lg mb-2">Key Objectives:</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-600">
+                            <li>Generate authentic, lifestyle UGC for new audiences.</li>
+                            <li>Increase brand relevancy and social engagement.</li>
+                            <li>Validate attributable ROI with hard sales data.</li>
+                            <li>Formalize engagement with organic community members.</li>
+                        </ul>
+                    </div>
+                    <div>
+                         <h4 class="font-semibold text-lg mb-2">Pilot Details:</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-600">
+                            <li><strong>Duration:</strong> 12 month contract with a 90 day notice period which can be given after the first 90 days</li>
+                            <li><strong>Target Audience:</strong> Select group of engaged fans from email lists, social media, and Reddit communities.</li>
+                            <li><strong>Focus:</strong> Missions designed for TikTok/Instagram, showcasing Zippo tricks, urban lifestyles, and new product use-cases.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-amber-50/50 border-l-4 border-[#C0952B] p-4 rounded-r-lg">
+                    <h4 class="font-semibold text-lg mb-2">Next Step: Bespoke Demo</h4>
+                    <p class="text-gray-700">As discussed, our team will build a tailored demo environment for the next meeting. This will provide the tangible, Zippo-specific examples needed for your leadership to visualize the full potential of this partnership.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Strategic Impact & ROI for Zippo Leadership -->
+        <section id="leadership" class="scroll-mt-24">
+             <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Strategic Impact & ROI for Zippo Leadership</h2>
+                <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Brandbassador offers a modern, measurable solution that aligns with Zippo's strategic imperatives, delivering tangible value to the bottom line and future-proofing marketing efforts.</p>
+            </div>
+            <div class="max-w-4xl mx-auto space-y-8">
+                <div class="bg-white rounded-xl shadow-lg border border-gray-200/50 p-6 fade-in">
+                    <h3 class="font-bold text-xl mb-4 text-[#C0952B]">Future-Proofing Zippo's Brand & Marketing</h3>
+                    <p class="text-gray-600 mb-4">Zippo's iconic legacy is a powerful asset, but continuous market leadership demands agility and fresh appeal. Brandbassador directly enables Zippo to penetrate **Gen Z and younger millennial demographics**, proactively shifting brand perception and ensuring long-term relevance. By empowering authentic customer voices, Zippo can organically shed the "grandpa's lighter" image and become a dynamic, aspirational brand for a new generation of consumers, securing future market share and brand equity.</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg border border-gray-200/50 p-6 fade-in">
+                    <h3 class="font-bold text-xl mb-4 text-[#C0952B]">Driving Measurable Growth & Optimizing ROI</h3>
+                    <p class="text-gray-600 mb-4">For a data-centric organization like Zippo, **measurable return on investment (ROI) is paramount**. Brandbassador integrates seamlessly into your existing MarTech stack, complementing Domo as your "single source of truth." We provide **direct attribution of sales and traffic** generated by brand advocates, offering clear, actionable data that can be used to justify marketing spend and optimize campaigns. This approach delivers a highly **cost-efficient channel for content creation and customer acquisition**, significantly reducing reliance on escalating traditional advertising costs and contributing directly to the bottom line.</p>
+                </div>
+                 <div class="bg-white rounded-xl shadow-lg border border-gray-200/50 p-6 fade-in">
+                    <h3 class="font-bold text-xl mb-4 text-[#C0952B]">Unlocking & Unifying Community Capital</h3>
+                    <p class="text-gray-600 mb-4">Zippo's greatest untapped asset is its **passionate, global community**. Currently fragmented across self-organized platforms like subreddits, Discord, and various collector clubs, this immense loyalty can be formalized and scaled. Brandbassador provides the platform to unify these efforts, transforming passive fans into an **active, gamified marketing force**. This not only deepens customer loyalty and retention but also creates an **evergreen pipeline of authentic user-generated content, invaluable market insights, and organic reach** that would otherwise remain uncaptured and unutilized.</p>
+                </div>
+                 <div class="bg-white rounded-xl shadow-lg border border-gray-200/50 p-6 fade-in">
+                    <h3 class="font-bold text-xl mb-4 text-[#C0952B]">Ensuring Brand Safety & Global Compliance</h3>
+                    <p class="text-gray-600 mb-4">We recognize Zippo's "very risk averse" nature and the critical importance of brand integrity. Brandbassador is built with **robust brand safety features and flexible compliance controls** at its core. You retain full control over content guidelines, including mandating disclosures (e.g., #ad, #paidsponsorship) as per FCC/ASA regulations, customizable for each market. Our platform ensures that while empowering your advocates to create and share, Zippo maintains **complete brand control and strict regulatory adherence** across all its global operations, mitigating potential risks effectively.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="bg-gray-800 text-white mt-16">
+        <div class="container mx-auto px-6 py-4 text-center text-sm">
+            <p>&copy; 2025 Brandbassador. Confidential Strategic Proposal.</p>
+        </div>
+    </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const chartData = {
+        trafficSources: {
+            labels: ['Direct', 'Organic Search', 'Social (Reddit)', 'Other'],
+            data: [45.83, 37.9, 10, 6.27] 
+        }
+    };
+
+    const solutionDetails = {
+        ugc: {
+            title: 'How We Scale Authentic UGC',
+            text: 'Brandbassador transforms content creation from episodic campaigns into an always-on engine. Through gamified "Missions," Zippo can incentivize thousands of fans to create a continuous stream of high-quality, authentic content. This showcases your diversified products (outdoor gear, home goods, accessories) in real-world settings, providing an evergreen library of marketing assets to combat social media engagement decline and speak credibly to new, younger audiences.'
+        },
+        community: {
+            title: 'How We Formalize Community & Loyalty',
+            text: 'Passionate but self-organized communities on Reddit (r/Zippo) and global collector clubs are a massive, underutilized asset. Brandbassador provides the structure to bring these fans into a formal program. You can unify your VIP program and organic communities under one roof, rewarding members not just for purchases, but for advocacy, content creation, and social sharing. Our "Levels" feature creates a tiered loyalty system, deepening engagement and transforming passive fans into an active, scalable marketing force.'
+        },
+        roi: {
+            title: 'How We Drive Measurable ROI',
+            text: 'Given Zippo\'s use of Domo as a "single source of truth," measurable performance is non-negotiable. Brandbassador is built for this. We provide custom discount codes and tracking links to attribute sales directly to ambassador efforts. This delivers hard ROI data that proves the value of community marketing, fits perfectly into Zippo\'s data-centric MarTech stack, and allows for precise optimization of your marketing spend, providing the tangible results leadership requires.'
+        },
+        safety: {
+            title: 'How We Ensure Brand Safety & Compliance',
+            text: 'Zippo is "very risk averse," and our platform is designed with that in mind. We offer robust flexibility and control. Zippo can define specific rules for missions, such as mandating "#ad" or "#paidsponsorship" disclosures to comply with FCC/ASA regulations. Content can be reviewed and approved before going live. These rules can be customized for different international markets, ensuring peace of mind and full compliance with your brand safety protocols.'
+        }
+    };
+
+    const communityDiagramContent = {
+        fragmented: `
+            <div class="fade-in">
+                <h4 class="font-bold text-xl mb-4 text-center">Current State: A Fragmented Ecosystem</h4>
+                <p class="text-center text-gray-600 text-sm mb-6">Passionate communities exist but are disconnected, limiting their collective impact and making ROI measurement difficult.</p>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-center gap-4">
+                       <div class="bg-gray-100 p-3 rounded-lg text-center w-1/2"><strong>Organic Communities</strong><p class="text-xs text-gray-500">Reddit, Discord, Clubs</p></div>
+                       <div class="bg-gray-100 p-3 rounded-lg text-center w-1/2"><strong>Influencer Collabs</strong><p class="text-xs text-gray-500">Episodic, High-Effort</p></div>
+                    </div>
+                    <div class="flex items-center justify-center gap-4">
+                        <div class="bg-gray-100 p-3 rounded-lg text-center w-1/2"><strong>VIP Program</strong><p class="text-xs text-gray-500">Lacks Gamification</p></div>
+                        <div class="bg-gray-100 p-3 rounded-lg text-center w-1/2"><strong>Affiliate Schemes</strong><p class="text-xs text-gray-500">Regional, Disparate</p></div>
+                    </div>
+                </div>
+                 <button id="toggle-community-view" class="w-full mt-6 bg-[#C0952B] text-white font-semibold py-2 px-4 rounded-lg hover:bg-opacity-90 transition">Show The Unified Solution &rarr;</button>
+            </div>`,
+        unified: `
+            <div class="fade-in">
+                 <h4 class="font-bold text-xl mb-4 text-center">Future State: The Unified Brandbassador Hub</h4>
+                 <p class="text-center text-gray-600 text-sm mb-6">All advocacy efforts are centralized, creating a scalable engine for UGC, sales, and insights with clear, measurable ROI.</p>
+                <div class="border-4 border-[#C0952B] rounded-lg p-4 text-center relative">
+                    <strong class="text-lg text-[#C0952B]">Brandbassador Core Engine</strong>
+                     <div class="grid grid-cols-2 gap-4 text-center mt-4">
+                        <div class="bg-amber-100/50 p-2 rounded-lg"><strong>Gamified Missions</strong></div>
+                        <div class="bg-amber-100/50 p-2 rounded-lg"><strong>Content Scaling</strong></div>
+                        <div class="bg-amber-100/50 p-2 rounded-lg"><strong>Referral Sales</strong></div>
+                        <div class="bg-amber-100/50 p-2 rounded-lg"><strong>Analytics & ROI</strong></div>
+                    </div>
+                </div>
+                 <button id="toggle-community-view" class="w-full mt-6 bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-gray-700 transition">&larr; See The Current State</button>
+            </div>`
+    };
+
+    function renderCommunityDiagram(state = 'fragmented') {
+        const container = document.getElementById('community-diagram');
+        if (container) {
+            container.innerHTML = communityDiagramContent[state];
+            const toggleButton = container.querySelector('#toggle-community-view');
+            if (toggleButton) {
+                toggleButton.addEventListener('click', () => {
+                    renderCommunityDiagram(state === 'fragmented' ? 'unified' : 'fragmented');
+                });
+            }
+        }
+    }
+
+    renderCommunityDiagram();
+
+    
+    const tsCtx = document.getElementById('trafficSourceChart')?.getContext('2d');
+    if (tsCtx) {
+        new Chart(tsCtx, {
+            type: 'doughnut',
+            data: {
+                labels: chartData.trafficSources.labels,
+                datasets: [{
+                    label: 'Traffic Source',
+                    data: chartData.trafficSources.data,
+                    backgroundColor: ['#4A5568', '#718096', '#ED8936', '#A0AEC0'],
+                    borderColor: '#FDFBF7',
+                    borderWidth: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    },
+                    title: {
+                        display: false
+                    }
+                }
+            }
+        });
+    }
+
+    const solutionCards = document.querySelectorAll('.solution-card');
+    const solutionDetailsContainer = document.getElementById('solution-details');
+    if (solutionCards.length > 0 && solutionDetailsContainer) {
+        solutionCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const solutionKey = card.dataset.solution;
+                const details = solutionDetails[solutionKey];
+                
+                solutionDetailsContainer.innerHTML = `
+                    <div class="fade-in">
+                        <h5 class="font-bold text-xl mb-2 text-[#C0952B]">${details.title}</h5>
+                        <p class="text-gray-700">${details.text}</p>
+                    </div>
+                `;
+                solutionDetailsContainer.classList.remove('hidden');
+
+                solutionCards.forEach(c => c.classList.remove('ring-2', 'ring-[#C0952B]'));
+                card.classList.add('ring-2', 'ring-[#C0952B]');
+
+                solutionDetailsContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+        });
+    }
+    
+    
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuButton?.addEventListener('click', () => {
+        mobileMenu?.classList.toggle('hidden');
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetElement = document.querySelector(this.getAttribute('href'));
+            if (targetElement) {
+                 targetElement.scrollIntoView({ behavior: 'smooth' });
+            }
+            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                 mobileMenu.classList.add('hidden');
+            }
+        });
+    });
+
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('section');
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (pageYOffset >= sectionTop - 150) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    });
+
+});
+</script>
+
+</body>
+</html>
